@@ -1,5 +1,5 @@
 package com.hdfclife.model;
 
 public enum ClaimStatus {
-    SUBMITTED, APPROVED
+    SUBMITTED, APPROVED, REJECTED
 }
