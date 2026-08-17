@@ -1,7 +1,7 @@
 package com.hdfclife.model;
 
 public class TermLifePolicy extends Policy{
-    public TermLifePolicy(String policyNo, String customerName, int premium, ClaimStatus status){
+    public TermLifePolicy(String policyNo, String customerName, int premium, PolicyStatus status){
         super(policyNo, customerName, premium, status);
     }
 

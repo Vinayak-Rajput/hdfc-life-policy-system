@@ -3,11 +3,11 @@ package com.hdfclife.factory;
 import com.hdfclife.model.*;
 
 public class PolicyFactory {
-    Policy create(String type, String policyNo, String customer, int basePremium, ClaimStatus claimStatus){
+    public Policy create(String type, String policyNo, String customer, int basePremium, PolicyStatus policyStatus){
         return switch (type) {
-            case "TERM" -> new TermLifePolicy(policyNo, customer, basePremium, claimStatus);
-            case "ENDOWMENT" -> new EndowmentPolicy(policyNo, customer, basePremium, claimStatus);
-            case "ULIP" -> new UlipPolicy(policyNo, customer, basePremium, claimStatus);
+            case "TERM" -> new TermLifePolicy(policyNo, customer, basePremium, policyStatus);
+            case "ENDOWMENT" -> new EndowmentPolicy(policyNo, customer, basePremium, policyStatus);
+            case "ULIP" -> new UlipPolicy(policyNo, customer, basePremium, policyStatus);
             default -> null;
         };
     }

@@ -4,9 +4,9 @@ public abstract class Policy {
     private String policyNo;
     private String customerName;
     private double premium;
-    private ClaimStatus status;
+    private PolicyStatus status;
 
-    public Policy(String policyNo, String customerName, double premium, ClaimStatus status) {
+    public Policy(String policyNo, String customerName, double premium, PolicyStatus status) {
         this.policyNo = policyNo;
         this.customerName = customerName;
         this.premium = premium;
@@ -25,14 +25,13 @@ public abstract class Policy {
         return premium;
     }
 
-    public ClaimStatus getStatus() {
+    public PolicyStatus getStatus() {
         return status;
     }
 
     @Override
     public String toString() {
-        return policyNo + '|' + customerName + '|'
-                + premium + "|" + status;
+        return String.format("%-15s | %-15s | %10s | %-8s", policyNo , customerName,premium,status);
     }
 
     public abstract String getType();
