@@ -5,11 +5,13 @@ import com.hdfclife.factory.PolicyFactory;
 import com.hdfclife.model.Policy;
 import com.hdfclife.model.PolicyStatus;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class Main {
+
+
     static void main(String[] args) {
         AppConfig appConfig = AppConfig.INSTANCE;
 
@@ -27,14 +29,25 @@ public class Main {
                 new PolicyFactory().create("ENDOWMENT", "HDFC-LIFE-1006", "Anita Sharma", 22000, PolicyStatus.PENDING)
         );
 
-        for(Policy policy : policies){
-            System.out.println(policy);
+        // Iterating through the policies with help of Iterator
+        Iterator<Policy> policyIterator = new Iterator<Policy>() {
+
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < policies.size();
+            }
+
+            @Override
+            public Policy next() {
+                return policies.get(index++);
+            }
+        };
+
+        while(policyIterator.hasNext()){
+            System.out.println(policyIterator.next());
         }
-
-
-
-
-
 
     }
 }
