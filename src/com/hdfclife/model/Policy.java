@@ -4,9 +4,9 @@ public abstract class Policy {
     private String policyNo;
     private String customerName;
     private double premium;
-    private String status;
+    private ClaimStatus status;
 
-    public Policy(String policyNo, String customerName, double premium, String status) {
+    public Policy(String policyNo, String customerName, double premium, ClaimStatus status) {
         this.policyNo = policyNo;
         this.customerName = customerName;
         this.premium = premium;
@@ -25,7 +25,7 @@ public abstract class Policy {
         return premium;
     }
 
-    public String getStatus() {
+    public ClaimStatus getStatus() {
         return status;
     }
 

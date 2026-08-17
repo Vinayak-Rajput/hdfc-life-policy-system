@@ -10,4 +10,12 @@ public enum AppConfig {
         companyName = "HDFC Life";
         maxClaimAmount = 500000;
     }
+
+    public int getMaxClaimAmount() {
+        return maxClaimAmount;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
 }

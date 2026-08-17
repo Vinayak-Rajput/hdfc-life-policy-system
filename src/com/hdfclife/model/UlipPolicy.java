@@ -1,7 +1,7 @@
 package com.hdfclife.model;
 
 public class UlipPolicy extends Policy {
-    public UlipPolicy(String policyNo, String customerName, int premium, String status){
+    public UlipPolicy(String policyNo, String customerName, int premium, ClaimStatus status){
         super(policyNo, customerName, premium, status);
     }
 
