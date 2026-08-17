@@ -1,4 +1,5 @@
 package com.hdfclife.strategy;
 
-public interface PremiumStrategy {
+public interface PremiumStrategy{
+    double getPremiumRate();
 }
