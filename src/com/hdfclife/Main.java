@@ -2,8 +2,10 @@ package com.hdfclife;
 
 import com.hdfclife.config.AppConfig;
 import com.hdfclife.factory.PolicyFactory;
-import com.hdfclife.model.Policy;
-import com.hdfclife.model.PolicyStatus;
+import com.hdfclife.model.*;
+import com.hdfclife.observer.BranchLetterNotifier;
+import com.hdfclife.observer.ClaimEventPublisher;
+import com.hdfclife.observer.InAppNotifier;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -48,6 +50,30 @@ public class Main {
         while(policyIterator.hasNext()){
             System.out.println(policyIterator.next());
         }
+
+        // Registering Observers
+        ClaimEventPublisher claimEventPublisher = new ClaimEventPublisher();
+
+        claimEventPublisher.subscribe(new BranchLetterNotifier());
+        claimEventPublisher.subscribe(new InAppNotifier());
+
+        // Filing three claims
+        Claim claim1  = new Claim.ClaimBuilder("HDFC-LIFE-1001",30000, Urgency.HIGH)
+                .hospitalName("Apollo Hospital")
+                .remarks("Hospitalisation")
+                .build();
+
+        Claim claim2 = new Claim.ClaimBuilder("HDFC-LIFE-1002",30000, Urgency.MEDIUM)
+                .hospitalName("AIMS Delhi")
+                .remarks("Minor Fractures; Discharges Last Week")
+                .build();
+
+        Claim claim3 = new Claim.ClaimBuilder("HDFC-LIFE-1004",30000, Urgency.LOW)
+                .remarks("Just Matured")
+                .build();
+
+        // Approving the claim with urgency HIGH
+        claimEventPublisher.updateStatus(claim1, ClaimStatus.APPROVED);
 
     }
 }
