@@ -1,5 +1,6 @@
 package com.hdfclife.strategy;
 
-public interface PremiumStrategy{
-    int getPremiumRate();
+public interface PremiumStrategy {
+
+    double calculate(double basePremium);
 }

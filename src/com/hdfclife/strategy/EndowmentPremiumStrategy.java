@@ -2,8 +2,11 @@ package com.hdfclife.strategy;
 
 public class EndowmentPremiumStrategy implements PremiumStrategy{
 
+    int premiumRate = 108;
+
     @Override
-    public int getPremiumRate() {
-        return 108;
+    public double calculate(double basePremium) {
+
+        return (basePremium * premiumRate) / 100;
     }
 }

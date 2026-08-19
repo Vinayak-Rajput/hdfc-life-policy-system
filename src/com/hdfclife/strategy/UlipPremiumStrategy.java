@@ -1,8 +1,12 @@
 package com.hdfclife.strategy;
 
 public class UlipPremiumStrategy implements PremiumStrategy{
+
+    int premiumRate = 112;
+
     @Override
-    public int getPremiumRate() {
-        return 112;
+    public double calculate(double basePremium) {
+
+        return (basePremium * premiumRate) / 100;
     }
 }
