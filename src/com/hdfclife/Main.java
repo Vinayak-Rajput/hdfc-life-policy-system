@@ -7,9 +7,7 @@ import com.hdfclife.observer.BranchLetterNotifier;
 import com.hdfclife.observer.ClaimEventPublisher;
 import com.hdfclife.observer.InAppNotifier;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -58,22 +56,45 @@ public class Main {
         claimEventPublisher.subscribe(new InAppNotifier());
 
         // Filing three claims
-        Claim claim1  = new Claim.ClaimBuilder("HDFC-LIFE-1001",30000, Urgency.HIGH)
+        List<Claim> claims = Arrays.asList(
+                new Claim.ClaimBuilder("HDFC-LIFE-1001",30000, Urgency.HIGH)
                 .hospitalName("Apollo Hospital")
                 .remarks("Hospitalisation")
-                .build();
+                .build(),
 
-        Claim claim2 = new Claim.ClaimBuilder("HDFC-LIFE-1002",30000, Urgency.MEDIUM)
+                new Claim.ClaimBuilder("HDFC-LIFE-1002",30000, Urgency.MEDIUM)
                 .hospitalName("AIMS Delhi")
                 .remarks("Minor Fractures; Discharges Last Week")
-                .build();
+                .build(),
 
-        Claim claim3 = new Claim.ClaimBuilder("HDFC-LIFE-1004",30000, Urgency.LOW)
+                new Claim.ClaimBuilder("HDFC-LIFE-1004",30000, Urgency.LOW)
                 .remarks("Just Matured")
-                .build();
+                .build()
+                );
 
         // Approving the claim with urgency HIGH
-        claimEventPublisher.updateStatus(claim1, ClaimStatus.APPROVED);
+        claimEventPublisher.updateStatus(claims.get(0), ClaimStatus.APPROVED);
+
+        //Creation of TreeMap for storing Policies by their Policy Number
+        TreeMap<Policy,String> sortedByPolicyNumber = new TreeMap<>(Comparator.comparing(Policy::getPolicyNo));
+        for(Policy policy: policies){
+            sortedByPolicyNumber.put(policy,policy.getPolicyNo());
+        }
+
+        //HashMap for Policy Lookup via Policy Number
+        HashMap<String, Policy> policyLookUp = new HashMap<>();
+        for(Policy policy: policies){
+            policyLookUp.put(policy.getPolicyNo(),policy);
+        }
+
+        //PriorityQueue for Claims ordered by urgency
+        PriorityQueue<Claim> urgencyQueue = new PriorityQueue<>(Comparator.comparing(Claim::getUrgency));
+        urgencyQueue.addAll(claims);
+
+
+
+
+
 
     }
 }

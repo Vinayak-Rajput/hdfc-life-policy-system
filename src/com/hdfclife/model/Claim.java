@@ -6,7 +6,7 @@ public class Claim implements Comparable<Claim> {
     private Urgency urgency;
     private String hospitalName;
     private String remarks;
-    private ClaimStatus status;
+    private ClaimStatus status = ClaimStatus.SUBMITTED;
 
     public String getPolicyNo() {
         return policyNo;
@@ -36,12 +36,13 @@ public class Claim implements Comparable<Claim> {
         this.policyNo = claimBuilder.policyNo;
         this.claimAmount = claimBuilder.claimAmount;
         this.urgency = claimBuilder.urgency;
-        this.status = ClaimStatus.SUBMITTED;
+        this.hospitalName = claimBuilder.hospitalName;
+        this.remarks = claimBuilder.remarks;
     }
 
     @Override
     public int compareTo(Claim other) {
-        return Integer.compare(this.urgency.ordinal(), other.urgency.ordinal());
+        return this.urgency.ordinal() - other.urgency.ordinal();
     }
 
     public static class ClaimBuilder{
@@ -50,28 +51,11 @@ public class Claim implements Comparable<Claim> {
         private Urgency urgency;
         private String hospitalName;
         private String remarks;
-        private ClaimStatus status;
 
         public ClaimBuilder(String policyNo, double claimAmount, Urgency urgency){
             this.policyNo = policyNo;
             this.claimAmount = claimAmount;
             this.urgency = urgency;
-        }
-
-        public String getPolicyNo() {
-            return policyNo;
-        }
-
-        public double getClaimAmount() {
-            return claimAmount;
-        }
-
-        public Urgency getUrgency() {
-            return urgency;
-        }
-
-        public ClaimStatus getStatus() {
-            return status;
         }
 
         public ClaimBuilder hospitalName(String hospitalName){

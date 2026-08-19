@@ -3,13 +3,13 @@ package com.hdfclife.model;
 public abstract class Policy {
     private String policyNo;
     private String customerName;
-    private double premium;
+    private double basePremium;
     private PolicyStatus status;
 
-    public Policy(String policyNo, String customerName, double premium, PolicyStatus status) {
+    public Policy(String policyNo, String customerName, double basePremium, PolicyStatus status) {
         this.policyNo = policyNo;
         this.customerName = customerName;
-        this.premium = premium;
+        this.basePremium = basePremium;
         this.status = status;
     }
 
@@ -22,7 +22,7 @@ public abstract class Policy {
     }
 
     public double getPremium() {
-        return premium;
+        return basePremium;
     }
 
     public PolicyStatus getStatus() {
@@ -31,7 +31,7 @@ public abstract class Policy {
 
     @Override
     public String toString() {
-        return String.format("%-15s | %-15s | %10s | %-8s", policyNo , customerName,premium,status);
+        return String.format("%-15s | %-15s | %10s | %-8s", policyNo , customerName,basePremium,status);
     }
 
     public abstract String getType();
