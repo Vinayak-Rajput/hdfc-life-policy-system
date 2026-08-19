@@ -36,11 +36,15 @@ public class Main {
 
             @Override
             public boolean hasNext() {
+
+
                 return index < policies.size();
             }
 
             @Override
             public Policy next() {
+
+
                 return policies.get(index++);
             }
         };
@@ -74,26 +78,6 @@ public class Main {
 
         // Approving the claim with urgency HIGH
         claimEventPublisher.updateStatus(claims.get(0), ClaimStatus.APPROVED);
-
-        //Creation of TreeMap for storing Policies by their Policy Number
-        TreeMap<Policy,String> sortedByPolicyNumber = new TreeMap<>(Comparator.comparing(Policy::getPolicyNo));
-        for(Policy policy: policies){
-            sortedByPolicyNumber.put(policy,policy.getPolicyNo());
-        }
-
-        //HashMap for Policy Lookup via Policy Number
-        HashMap<String, Policy> policyLookUp = new HashMap<>();
-        for(Policy policy: policies){
-            policyLookUp.put(policy.getPolicyNo(),policy);
-        }
-
-        //PriorityQueue for Claims ordered by urgency
-        PriorityQueue<Claim> urgencyQueue = new PriorityQueue<>(Comparator.comparing(Claim::getUrgency));
-        urgencyQueue.addAll(claims);
-
-
-
-
 
 
     }
