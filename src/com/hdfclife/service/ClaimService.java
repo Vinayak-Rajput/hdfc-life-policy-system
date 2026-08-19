@@ -6,6 +6,8 @@ import com.hdfclife.exception.PolicyServiceException;
 import com.hdfclife.model.Claim;
 import com.hdfclife.observer.ClaimEventPublisher;
 
+import java.time.LocalDateTime;
+
 public class ClaimService {
 
     private final ClaimEventPublisher claimEventPublisher;
@@ -24,7 +26,7 @@ public class ClaimService {
 
         try (AuditLogger auditLogger = new AuditLogger()) {
 
-            auditLogger.log("Filed Claim for Policy: " + claim.getPolicyNo());
+            auditLogger.log(LocalDateTime.now() + " - Filed Claim for Policy No: " +claim.getPolicyNo());
 
         } catch (Exception e){
 
