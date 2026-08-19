@@ -4,6 +4,7 @@ import com.hdfclife.config.AppConfig;
 import com.hdfclife.exception.InvalidClaimException;
 import com.hdfclife.exception.PolicyServiceException;
 import com.hdfclife.model.Claim;
+import com.hdfclife.model.ClaimStatus;
 import com.hdfclife.observer.ClaimEventPublisher;
 
 import java.time.LocalDateTime;
@@ -33,5 +34,12 @@ public class ClaimService {
             throw new PolicyServiceException("Audit Log Failure: " + e);
         }
 
+    }
+
+    public void claimUpdate(Claim claim, ClaimStatus claimStatus){
+
+        claim.updateStatus(claimStatus);
+
+        claimEventPublisher.notifyObservers(claim);
     }
 }

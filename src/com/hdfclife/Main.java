@@ -112,12 +112,10 @@ public class Main {
         }
 
         // Approving the claim with urgency HIGH - claims[0] contains the required HIGH urgency claim
+        // Automatically ClaimService will call notifyObservers for Claim Update
         System.out.println("\nUpdating HIGH claim to APPROVED");
-        claims.getFirst().updateStatus(ClaimStatus.APPROVED);
+        claimService.claimUpdate(claims.getFirst(),ClaimStatus.APPROVED);
 
-        // Notifying the Observers about this
-        System.out.println("\nNotifications shown by the Observers regarding update:");
-        claimEventPublisher.notifyObservers(claims.getFirst());
 
         // Building a Priority Queue in order of Claim's Urgency
         System.out.println("\nPriority Queue Poll Order:");

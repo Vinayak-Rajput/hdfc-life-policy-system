@@ -46,9 +46,9 @@ public class Claim implements Comparable<Claim> {
     }
 
     public static class ClaimBuilder{
-        private String policyNo;
-        private double claimAmount;
-        private Urgency urgency;
+        private final String policyNo;
+        private final double claimAmount;
+        private final Urgency urgency;
         private String hospitalName;
         private String remarks;
 
