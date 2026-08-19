@@ -1,9 +1,7 @@
 package com.hdfclife.observer;
 
 import com.hdfclife.model.Claim;
-import com.hdfclife.model.ClaimStatus;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 

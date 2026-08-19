@@ -1,10 +1,10 @@
 package com.hdfclife.model;
 
 public abstract class Policy {
-    private String policyNo;
-    private String customerName;
-    private double basePremium;
-    private PolicyStatus status;
+    private final String policyNo;
+    private final String customerName;
+    private final double basePremium;
+    private final PolicyStatus status;
 
     public Policy(String policyNo, String customerName, double basePremium, PolicyStatus status) {
         this.policyNo = policyNo;

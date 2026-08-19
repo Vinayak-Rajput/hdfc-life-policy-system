@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class AuditLogger implements AutoCloseable {
 
-    private FileWriter writer;
+    private final FileWriter writer;
 
     public AuditLogger() {
 

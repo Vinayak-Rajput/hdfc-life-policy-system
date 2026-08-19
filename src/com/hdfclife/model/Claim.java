@@ -1,11 +1,11 @@
 package com.hdfclife.model;
 
 public class Claim implements Comparable<Claim> {
-    private String policyNo;
-    private double claimAmount;
-    private Urgency urgency;
-    private String hospitalName;
-    private String remarks;
+    private final String policyNo;
+    private final double claimAmount;
+    private final Urgency urgency;
+    private final String hospitalName;
+    private final String remarks;
     private ClaimStatus status = ClaimStatus.SUBMITTED;
 
     public String getPolicyNo() {
