@@ -8,26 +8,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClaimEventPublisher {
+
     private final List<ClaimObserver> observers = new ArrayList<>();
 
-    public void subscribe(ClaimObserver observer){
+    public void register(ClaimObserver observer){
+
         observers.add(observer);
     }
 
-    public void unsubscribe(ClaimObserver observer){
+    public void deregister(ClaimObserver observer){
+
         observers.remove(observer);
     }
 
     public void notifyObservers(Claim claim){
+
         for(ClaimObserver observer: observers){
+
             observer.onClaimUpdate(claim);
         }
     }
 
     public void updateStatus(Claim claim, ClaimStatus newClaimStatus){
+
         claim.updateStatus(newClaimStatus);
 
         System.out.println("\nClaim Update:\n");
+
         notifyObservers(claim);
     }
 }
