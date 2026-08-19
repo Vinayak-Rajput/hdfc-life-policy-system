@@ -1,4 +1,9 @@
 package com.hdfclife.exception;
 
-public class InvalidClaimException extends Exception {
+public class InvalidClaimException extends RuntimeException {
+
+    public InvalidClaimException(String message) {
+
+        super(message);
+    }
 }
