@@ -12,6 +12,7 @@ import com.hdfclife.store.PolicyStore;
 import com.hdfclife.strategy.PremiumCalculator;
 import com.hdfclife.strategy.UlipPremiumStrategy;
 
+import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -24,7 +25,7 @@ public class Main {
         // Company Name fetched from AppConfig
         String companyName = appConfig.getCompanyName();
 
-        System.out.println("Company: " + companyName);
+        System.out.println("Company Name: " + companyName);
 
 
         // Creation of Policies (for seeding data)
@@ -43,6 +44,7 @@ public class Main {
         policyStore.add(PolicyFactory.create("ENDOWMENT", "HDFC-LIFE-1006", "Anita Sharma", 22000, PolicyStatus.PENDING));
 
         // Iterating through the policies with help of Iterator
+        System.out.println("\nCurrent Policies: ");
         Iterator<Policy> policyIterator = policyStore.getAll().iterator();
 
         while(policyIterator.hasNext()){
@@ -111,14 +113,13 @@ public class Main {
             claimService.fileClaim(claim);
         }
 
-        // Approving the claim with urgency HIGH - claims[0] contains the required HIGH urgency claim
-        // Automatically ClaimService will call notifyObservers for Claim Update
-        System.out.println("\nUpdating HIGH claim to APPROVED");
+        // Approving the claim with urgency HIGH - claims[0]; Automatically ClaimService will call notifyObservers for Claim Update
+        System.out.println("\nUpdating HIGH claim to APPROVED: \n");
         claimService.claimUpdate(claims.getFirst(),ClaimStatus.APPROVED);
 
 
         // Building a Priority Queue in order of Claim's Urgency
-        System.out.println("\nPriority Queue Poll Order:");
+        System.out.println("Priority Queue Poll Order:");
         PriorityQueue<Claim> priorityQueue = policyStore.buildPriorityQueue(claims.get(0), claims.get(1), claims.get(2));
 
         while(!priorityQueue.isEmpty()){
@@ -127,25 +128,26 @@ public class Main {
         }
 
         // Checking Exceptional Handling Mechanism for Policy that does not exist - HDFC-LIFE-9999
+        String policyNo = "HDFC-LIFE-9999";
         try {
 
-            policyStore.getPolicyByNo("HDFC-LIFE-9999");
+            policyStore.getPolicyByNo(policyNo);
 
         } catch (PolicyServiceException e) {
 
-            System.out.println("\nFailed Policy Lookup: " + e.getMessage());
+            System.out.println("\nFailed Policy Lookup for Policy No. \"" + policyNo + "\": " + e.getMessage());
 
         }
 
         // Checking Exceptional Handling Mechanism for a bad claim
         try {
 
-            Claim badClaim = new Claim.ClaimBuilder("HDFC-LIFE-1008",8000000, Urgency.HIGH).build();
+            Claim badClaim = new Claim.ClaimBuilder("HDFC-LIFE-1008",600000, Urgency.HIGH).build();
             claimService.fileClaim(badClaim);
 
         } catch (PolicyServiceException e) {
 
-            System.out.println("\nClaim amount Exceeded: " + e.getMessage());
+            System.out.println("\nCannot file claim. " + e.getMessage());
         }
 
         // Checking Exceptional Handling Mechanism for creating an invalid policy
@@ -158,8 +160,16 @@ public class Main {
             System.out.println("\n" + e.getMessage());
         }
 
+        // Reading a line from Audit.log
+        System.out.println("\nA Line from audit.log using BufferedReader:");
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader("audit.log"))){
 
+            System.out.println(bufferedReader.readLine());
 
+        } catch(IOException e) {
+
+            System.out.println("File not Found.");
+        }
 
     }
 }

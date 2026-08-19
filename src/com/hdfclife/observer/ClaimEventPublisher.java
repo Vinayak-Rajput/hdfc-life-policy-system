@@ -24,6 +24,7 @@ public class ClaimEventPublisher {
         for(ClaimObserver observer: observers){
 
             observer.onClaimUpdate(claim);
+            System.out.println();
         }
     }
 
