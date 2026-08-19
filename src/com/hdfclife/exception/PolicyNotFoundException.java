@@ -1,6 +1,6 @@
 package com.hdfclife.exception;
 
-public class PolicyNotFoundException extends RuntimeException {
+public class PolicyNotFoundException extends PolicyServiceException {
 
     public PolicyNotFoundException(String message) {
 

@@ -5,7 +5,7 @@ import com.hdfclife.model.*;
 
 public class PolicyFactory {
 
-    public Policy create(String type, String policyNo, String customer, int basePremium, PolicyStatus policyStatus){
+    public static Policy create(String type, String policyNo, String customer, int basePremium, PolicyStatus policyStatus){
 
         return switch (type) {
 

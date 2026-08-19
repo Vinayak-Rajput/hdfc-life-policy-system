@@ -29,12 +29,4 @@ public class ClaimEventPublisher {
         }
     }
 
-    public void updateStatus(Claim claim, ClaimStatus newClaimStatus){
-
-        claim.updateStatus(newClaimStatus);
-
-        System.out.println("\nClaim Update:\n");
-
-        notifyObservers(claim);
-    }
 }

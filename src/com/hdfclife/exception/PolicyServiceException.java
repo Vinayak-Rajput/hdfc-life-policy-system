@@ -7,8 +7,4 @@ public class PolicyServiceException extends RuntimeException {
         super(message);
     }
 
-    public PolicyServiceException(String message, Throwable cause) {
-
-        super(message, cause);
-    }
 }

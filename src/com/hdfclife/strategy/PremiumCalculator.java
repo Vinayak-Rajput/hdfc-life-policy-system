@@ -14,7 +14,7 @@ public class PremiumCalculator {
         this.premiumStrategy = premiumStrategy;
     }
 
-    double calculatePremium(PremiumStrategy premiumStrategy, double basePremium){
+    public double calculatePremium(double basePremium){
 
         return premiumStrategy.calculate(basePremium);
     }
